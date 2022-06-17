@@ -5,26 +5,31 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class AuthenticationController extends Controller
 {
     public function register(Request $request)
 
     {
-    
+    Log::emergency('registeren', ['ip' => $request->ip(),'data' => $request->all()]);
     $attr = $request->validate([
     
-    'gebruikersnaam' => 'required|string',
-    
-    'password' => 'required|string|min:6'
+        'name' => 'required|string|max:255',
+
+        'email' => 'required|string|email|unique:users,email',
+        
+        'password' => 'required|string|min:6|confirmed'
     
     ]);
     
     $user = User::create([
     
-    'gebruikersnaam' => $attr['gebruikersnaam'],
-    
-    'password' => bcrypt($attr['password'])
+        'name' => $attr['name'],
+
+        'password' => bcrypt($attr['password']),
+        
+        'email' => $attr['email']
     
     ]);
     
@@ -35,10 +40,12 @@ class AuthenticationController extends Controller
     public function login(Request $request)
     
     {
-    
+    Log::emergency('inloggen', ['ip' => $request->ip(),'data' => $request->all()]);
     $attr = $request->validate([
     
-    'password' => 'required|string|min:6'
+        'email' => 'required|string|email|',
+
+        'password' => 'required|string|min:6'
     
     ]);
     
@@ -63,7 +70,6 @@ class AuthenticationController extends Controller
     public function logout()
     
     {
-    
     auth()->user()->tokens()->delete();
     
     return response()->json(['message' => 'Tokens Revoked'], 200);

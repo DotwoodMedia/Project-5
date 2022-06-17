@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\OefeningController;
+use App\Http\Controllers\PrestatiesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('users', UserController::class);
+Route::apiResource('prestaties', PrestatiesController::class);
 Route::apiResource('oefeningen', OefeningController::class)
 ->parameters(['oefeningen' => 'oefening']);
 

@@ -115,7 +115,11 @@ return [
         ],
 
         'emergency' => [
-            'path' => storage_path('logs/laravel.log'),
+            'path' => storage_path('logs/custom.log'),
+        ],
+        'custom' => [
+            'driver' => 'monolog',
+            'path' => storage_path('logs/custom.log'),
         ],
     ],
 

@@ -2,12 +2,13 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
+use DateTime;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
-class UserSeeder extends Seeder
+class PrestatiesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,10 +17,9 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'name' => 'elay',
-            'email' => 'elay@gmail.com',
-            'password' => Hash::make('12345'),
+        DB::table('prestaties')->insert([
+            'naam' => 'Vliegensvlug',
+            'datum' => Carbon::now(),
         ]);
     }
 }
