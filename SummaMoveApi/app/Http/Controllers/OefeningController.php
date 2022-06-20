@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Oefening;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class OefeningController extends Controller
 {
@@ -33,7 +34,9 @@ class OefeningController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
+
     {
+        Log::emergency('store', [$request->all()]);
         return Oefening::create($request->all());
     }
 
@@ -68,6 +71,7 @@ class OefeningController extends Controller
      */
     public function update(Request $request, Oefening $oefening)
     {
+        Log::emergency('update', [$request->all()]);
         $oefening->update($request->all());
 
         return $oefening;
@@ -81,6 +85,7 @@ class OefeningController extends Controller
      */
     public function destroy($oefening)
     {
+        Log::emergency('Delete', $oefening);
         $oefening->delete();
     }
 }
