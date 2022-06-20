@@ -1,13 +1,41 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react'
-import { Text, View, ScrollView, Image } from 'react-native';
+import React, { useEffect, useState, useContext } from 'react';
+import { Text, View, ScrollView, Image, T } from 'react-native';
+import { AuthContext } from '../providers/AuthProvider';
+import axios from 'axios';
 
 import tw from 'tailwind-react-native-classnames';
 
+axios.defaults.baseURL = 'http://10.244.17.35:8000/api';
+
 export default function Home() {
+    const [userData, setUserData] = useState('');
+
+    const { user } = useContext(AuthContext);
+    axios.defaults.headers.common['Authorization'] = `Bearer ${user}`;
+
+    useEffect(() => {
+        try {
+            axios.get('user').then(response => {
+                if (response.data.message == "Unauthenticated.") {
+                    return logout();
+                }
+
+                setUserData(response.data);
+            }).catch(error => {
+                console.log(error.response);
+            })
+        } catch (error) {
+            if (error.response.data.message == "Unauthenticated.") {
+                // return logout();
+            }
+            console.log(error);
+        }
+    }, [])
+
     return (
         <ScrollView style={tw.style('bg-gray-100 h-full px-5 mt-16')}>
-            <Text style={tw.style('font-black text-3xl')}>Hallo Pascal 👋</Text>
+            <Text style={tw.style('font-black text-3xl')}>Hallo { userData.name } 👋</Text>
             <Text style={tw.style('font-bold text-lg')}>Laten we je activiteit checken</Text>
             <StatusBar style="auto" />
 
