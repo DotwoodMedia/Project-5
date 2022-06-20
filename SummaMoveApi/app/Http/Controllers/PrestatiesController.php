@@ -24,7 +24,6 @@ class PrestatiesController extends Controller
      */
     public function create()
     {
-
     }
 
     /**
@@ -67,7 +66,7 @@ class PrestatiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Prestatie $prestatie)
+    public function update(Request $request, Prestatie $prestatie)
     {
         $prestatie->update($request->all());
 

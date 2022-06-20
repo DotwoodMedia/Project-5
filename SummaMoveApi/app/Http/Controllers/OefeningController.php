@@ -24,7 +24,6 @@ class OefeningController extends Controller
      */
     public function create()
     {
-
     }
 
     /**
@@ -67,7 +66,7 @@ class OefeningController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Oefening $oefening)
+    public function update(Request $request, Oefening $oefening)
     {
         $oefening->update($request->all());
 
