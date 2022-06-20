@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Prestatie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PrestatiesController extends Controller
 {
@@ -35,6 +36,7 @@ class PrestatiesController extends Controller
      */
     public function store(Request $request)
     {
+        Log::emergency('store', [$request->all()]);
         return Prestatie::create($request->all());
     }
 
@@ -69,6 +71,7 @@ class PrestatiesController extends Controller
      */
     public function update(Request $request,Prestatie $prestatie)
     {
+        Log::emergency('update', [$request->all()]);
         $prestatie->update($request->all());
 
         return $prestatie;
@@ -82,6 +85,7 @@ class PrestatiesController extends Controller
      */
     public function destroy($prestatie)
     {
+        Log::emergency('destroy', $prestatie);
         $prestatie->delete();
     }
 }
