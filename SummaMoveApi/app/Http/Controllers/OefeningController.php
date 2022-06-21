@@ -15,16 +15,7 @@ class OefeningController extends Controller
      */
     public function index()
     {
-        return Oefening::All();
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
+        return Oefening::all();
     }
 
     /**
@@ -49,17 +40,6 @@ class OefeningController extends Controller
     public function show(Oefening $oefening)
     {
         return $oefening;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**

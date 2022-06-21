@@ -22,10 +22,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::middleware('auth:sanctum')->get('/user/prestaties', function (Request $request) {
+    return $request->user()->prestaties()->get();
+});
+
+Route::middleware('auth:sanctum')->get('/user/oefeningen', function (Request $request) {
+    return $request->user()->oefeningen()->get();
+});
+
 Route::apiResource('users', UserController::class);
 Route::apiResource('prestaties', PrestatiesController::class);
-Route::apiResource('oefeningen', OefeningController::class)
-->parameters(['oefeningen' => 'oefening']);
+Route::apiResource('oefeningen', OefeningController::class);
 
 Route::post('/register', [AuthenticationController::class, 'register']);
 
