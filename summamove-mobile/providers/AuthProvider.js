@@ -2,7 +2,7 @@ import React, { useState, createContext, useEffect } from 'react';
 import * as SecureStore from 'expo-secure-store';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://10.244.17.35:8000/api';
+axios.defaults.baseURL = 'http://10.244.18.24:8000/api';
 
 export const AuthContext = createContext();
 
