@@ -2,6 +2,9 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 import Home from '../screens/Home';
+import Oefeningen from '../screens/Oefeningen/index';
+import Prestaties from '../screens/Prestaties/index';
+import OverOns from '../screens/OverOns';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -25,7 +28,7 @@ export default function AppStack({ navigation }) {
                         <MaterialCommunityIcons name="ballot" color={color} size={26} />
                     ),
                 }}
-                component={Home} />
+                component={Oefeningen} />
 
             <Tab.Screen name="Prestaties"
                 options={{
@@ -33,7 +36,7 @@ export default function AppStack({ navigation }) {
                         <MaterialCommunityIcons name="star" color={color} size={26} />
                     ),
                 }}
-                component={Home} />
+                component={Prestaties} />
 
             <Tab.Screen name="Over ons"
                 options={{
@@ -41,7 +44,7 @@ export default function AppStack({ navigation }) {
                         <MaterialCommunityIcons name="book-account" color={color} size={26} />
                     ),
                 }}
-                component={Home} />
+                component={OverOns} />
         </Tab.Navigator>
     );
 }

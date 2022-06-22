@@ -1,7 +1,7 @@
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
-import Home from '../screens/Home';
+import Oefeningen from '../screens/Oefeningen';
 import Login from '../screens/Login';
 import Register from '../screens/Register';
 
@@ -19,7 +19,7 @@ export default function AppStack({ navigation }) {
                         <MaterialCommunityIcons name="ballot" color={color} size={26} />
                     ),
                 }}
-                component={Home} />
+                component={Oefeningen} />
 
             <Tab.Screen name="Inloggen"
                 options={{
