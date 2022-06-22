@@ -10,8 +10,9 @@ class Prestatie extends Model
     use HasFactory;
 
     protected $fillable = ["naam", "datum", "starttijd", "eindtijd"];
-    public function Users()
+
+    public function User()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class);
     }
 }

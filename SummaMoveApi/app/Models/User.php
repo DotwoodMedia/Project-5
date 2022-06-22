@@ -49,6 +49,6 @@ class User extends Authenticatable
 
     public function prestaties()
     {
-        return $this->belongsToMany(Prestatie::class);
+        return $this->hasMany(Prestatie::class);
     }
 }
