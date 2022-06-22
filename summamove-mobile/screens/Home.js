@@ -4,7 +4,7 @@ import { Text, View, ScrollView, Image, T } from 'react-native';
 import { AuthContext } from '../providers/AuthProvider';
 import axios from 'axios';
 import { useIsFocused } from "@react-navigation/native";
-import { API_URL, SITE_URL } from "@env";
+import { API_URL } from "@env";
 
 import tw from 'tailwind-react-native-classnames';
 
@@ -43,6 +43,16 @@ export default function Home() {
                     console.log(error.response);
                 })
 
+                axios.get('user/prestaties').then(response => {
+                    if (response.data.message == "Unauthenticated.") {
+                        return logout();
+                    }
+
+                    setUserPrestaties(response.data);
+                }).catch(error => {
+                    console.log(error.response);
+                })
+
                 axios.get('oefeningen').then(response => {
                     if (response.data.message == "Unauthenticated.") {
                         return logout();
@@ -77,7 +87,7 @@ export default function Home() {
                         <Text style={tw.style('text-center text-lg')}><Text style={tw.style('font-bold')}>{userPrestaties.length}</Text> prestaties behaald</Text>
                     </View>
 
-                    <View style={tw.style('flex-1 bg-gray-200 rounded-3xl p-5 mr-4 shadow-md')}>
+                    <View style={tw.style('flex-1 bg-gray-200 rounded-3xl p-5 shadow-md')}>
                         <Image
                             style={tw.style('w-20 h-20 mx-auto mb-2')}
                             source={require('../assets/img/happy.png')}
@@ -103,18 +113,9 @@ export default function Home() {
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={tw.style('mt-5 flex-1')}>
                 {oefeningen.map(oefening => {
                     return (
-                        <View style={tw.style('bg-yellow-400 rounded-3xl p-5 mr-4 flex-row items-center')} key={oefening.id}>
-                            <View style={tw.style('mr-10')}>
-                                <Text style={tw.style('font-bold text-xl')}>{ oefening.naam }</Text>
-                                <Text style={tw.style('text-lg mb-2')}>{ oefening.beschrijving }</Text>
-                            </View>
-
-                            <Image
-                                style={tw.style('w-20 h-20')}
-                                source={{
-                                    uri: SITE_URL + oefening.img,
-                                }}
-                            />
+                        <View style={tw.style('bg-yellow-400 rounded-3xl p-5 mr-4')} key={oefening.id}>
+                            <Text style={tw.style('font-bold text-xl')}>{oefening.naam}</Text>
+                            <Text style={tw.style('text-lg mb-2')}>{oefening.beschrijving}</Text>
                         </View>
                     )
                 }
