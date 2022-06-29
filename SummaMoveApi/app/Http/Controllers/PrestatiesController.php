@@ -19,15 +19,6 @@ class PrestatiesController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -35,8 +26,12 @@ class PrestatiesController extends Controller
      */
     public function store(Request $request)
     {
-        Log::emergency('store', [$request->all()]);
-        return Prestatie::create($request->all());
+        $prestatie = Prestatie::create($request->all());
+
+        return response()->json([
+            'message' => 'Prestatie succesvol aangemaakt',
+            'prestatie' => $prestatie
+        ]);
     }
 
     /**
@@ -45,20 +40,10 @@ class PrestatiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Prestatie $prestatie)
+    public function show($id)
     {
-        return $prestatie;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $prestatie = Prestatie::where('id', $id)->get();
+        return response()->json($prestatie);
     }
 
     /**
@@ -68,12 +53,15 @@ class PrestatiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Prestatie $prestatie)
+    public function update(Request $request, $id)
     {
-        Log::emergency('update', [$request->all()]);
+        $prestatie = Prestatie::where('id', $id);
         $prestatie->update($request->all());
 
-        return $prestatie;
+        return response()->json([
+            'message' => 'Prestatie succesvol geupdate',
+            'prestatie' => $prestatie
+        ]);
     }
 
     /**
@@ -82,9 +70,13 @@ class PrestatiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($prestatie)
+    public function destroy($id)
     {
-        Log::emergency('destroy', $prestatie);
+        $prestatie = Prestatie::where('id', $id);
         $prestatie->delete();
+
+        return response()->json([
+            'message' => 'Prestatie verwijderd'
+        ]);
     }
 }

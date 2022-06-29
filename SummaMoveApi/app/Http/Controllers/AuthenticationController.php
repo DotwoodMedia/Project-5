@@ -10,70 +10,47 @@ use Illuminate\Support\Facades\Log;
 class AuthenticationController extends Controller
 {
     public function register(Request $request)
-
     {
-        Log::emergency('registeren', ['ip' => $request->ip(), 'data' => $request->all()]);
         $attr = $request->validate([
-
             'name' => 'required|string|max:255',
-
             'email' => 'required|string|email|unique:users,email',
-
             'password' => 'required|string|min:6|confirmed'
-
         ]);
 
         $user = User::create([
-
             'name' => $attr['name'],
-
             'password' => bcrypt($attr['password']),
-
             'email' => $attr['email']
-
         ]);
 
         $response = [
-
             'access_token' => $user->createToken('API Token')->plainTextToken,
-
             'token_type' => 'Bearer'
-
         ];
 
         return response()->json($response, 200);
     }
 
     public function login(Request $request)
-
     {
-        Log::emergency('inloggen', ['ip' => $request->ip(), 'data' => $request->all()]);
         $attr = $request->validate([
-
             'email' => 'required|string|email|',
-
             'password' => 'required|string|min:6'
-
         ]);
 
         if (!Auth::attempt($attr)) {
-
             return response()->json(['message' => 'Credentials not match'], 401);
         }
 
         $response = [
-
-            'access_token' => auth()->user()->createToken('API Token')->plainTextToken,
-
+            'access_token' => $user->createToken('API Token')->plainTextToken,
             'token_type' => 'Bearer'
-
         ];
 
         return response()->json($response, 200);
     }
 
     public function logout()
-
     {
         auth()->user()->tokens()->delete();
 

@@ -15,7 +15,6 @@ class UserController extends Controller
      */
     public function index()
     {
-
         return User::All();
     }
 
@@ -37,7 +36,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        Log::emergency('store', [$request->all()]);
         return User::create($request->all());
     }
 
@@ -72,7 +70,6 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        Log::emergency('update', [$request->all()]);
         $user->update($request->all());
 
         return $user;
@@ -86,8 +83,6 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {        
-        Log::emergency('destroy', $user);
-
         $user->delete();
     }
 }

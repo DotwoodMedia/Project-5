@@ -25,10 +25,13 @@ class OefeningController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-
     {
-        Log::emergency('store', [$request->all()]);
-        return Oefening::create($request->all());
+        $oefening = Oefening::create($request->all());
+
+        return response()->json([
+            'message' => 'Oefening succesvol aangemaakt',
+            'oefening' => $oefening
+        ]);
     }
 
     /**
@@ -37,9 +40,10 @@ class OefeningController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Oefening $oefening)
+    public function show($id)
     {
-        return $oefening;
+        $oefening = Oefening::where('id', $id)->get();
+        return response()->json($oefening);
     }
 
     /**
@@ -49,12 +53,15 @@ class OefeningController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Oefening $oefening)
+    public function update(Request $request, $id)
     {
-        Log::emergency('update', [$request->all()]);
+        $oefening = Oefening::where('id', $id)->get();
         $oefening->update($request->all());
 
-        return $oefening;
+        return response()->json([
+            'message' => 'Oefening succesvol geupdate',
+            'oefening' => $oefening
+        ]);
     }
 
     /**
@@ -63,9 +70,13 @@ class OefeningController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($oefening)
+    public function destroy($id)
     {
-        Log::emergency('Delete', $oefening);
+        $oefening = Oefening::where('id', $id);
         $oefening->delete();
+
+        return response()->json([
+            'message' => 'Oefening verwijderd'
+        ]);
     }
 }
