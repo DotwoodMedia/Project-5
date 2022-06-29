@@ -109,7 +109,8 @@ class OefeningenController extends Controller
     {
         if (session()->has('user')) {
         $token = Session::get('user')['access_token'];
-        $response = Http::withToken($token)->delete("http://project5.dotwood.media/api/oefeningen/$id");
+
+        $response = Http::withToken($token)->delete("http://project5.dotwood.media/api/oefeningen/$id"); dd($response, $token);
         return  view('/homepage');
         }
         else    {
