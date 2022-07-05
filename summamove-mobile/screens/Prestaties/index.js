@@ -33,6 +33,7 @@ export default function Prestaties() {
                 if (error.response.data.message == "Unauthenticated.") {
                     return logout();
                 }
+                
                 console.log(error);
             }
         }

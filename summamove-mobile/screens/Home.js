@@ -24,22 +24,22 @@ export default function Home() {
         if (isFocused) {
             try {
                 axios.get('user').then(response => {
-                    if (response.data.message == "Unauthenticated.") {
+                    setUserData(response.data);
+                }).catch(error => {
+                    if (error.response.data.message == "Unauthenticated.") {
                         return logout();
                     }
 
-                    setUserData(response.data);
-                }).catch(error => {
                     console.log(error.response);
                 })
 
                 axios.get('user/oefeningen').then(response => {
-                    if (response.data.message == "Unauthenticated.") {
+                    setUserOefeningen(response.data);
+                }).catch(error => {
+                    if (error.response.data.message == "Unauthenticated.") {
                         return logout();
                     }
 
-                    setUserOefeningen(response.data);
-                }).catch(error => {
                     console.log(error.response);
                 })
 
@@ -54,12 +54,12 @@ export default function Home() {
                 })
 
                 axios.get('oefeningen').then(response => {
-                    if (response.data.message == "Unauthenticated.") {
+                    setOefeningen(response.data);
+                }).catch(error => {
+                    if (error.response.data.message == "Unauthenticated.") {
                         return logout();
                     }
 
-                    setOefeningen(response.data);
-                }).catch(error => {
                     console.log(error.response);
                 })
             } catch (error) {

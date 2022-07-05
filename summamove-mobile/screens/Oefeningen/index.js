@@ -21,18 +21,19 @@ export default function Oefeningen() {
         if (isFocused) {
             try {
                 axios.get('oefeningen').then(response => {
-                    if (response.data.message == "Unauthenticated.") {
+                    setOefeningen(response.data);
+                }).catch(error => {
+                    if (error.response.data.message == "Unauthenticated.") {
                         return logout();
                     }
 
-                    setOefeningen(response.data);
-                }).catch(error => {
                     console.log(error.response);
                 })
             } catch (error) {
                 if (error.response.data.message == "Unauthenticated.") {
                     return logout();
                 }
+
                 console.log(error);
             }
         }
