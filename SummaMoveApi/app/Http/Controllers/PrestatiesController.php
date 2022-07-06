@@ -26,6 +26,7 @@ class PrestatiesController extends Controller
      */
     public function store(Request $request)
     {
+        Log::emergency('Prestatie aangemaakt');
         $prestatie = Prestatie::create($request->all());
 
         return response()->json([
@@ -72,6 +73,7 @@ class PrestatiesController extends Controller
      */
     public function destroy($id)
     {
+        
         $prestatie = Prestatie::where('id', $id);
         $prestatie->delete();
 

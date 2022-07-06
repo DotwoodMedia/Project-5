@@ -9,7 +9,7 @@ class Prestatie extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["naam", "datum", "starttijd", "eindtijd"];
+    protected $fillable = ["naam", "datum", "starttijd", "eindtijd", "user_id"];
 
     public function User()
     {
