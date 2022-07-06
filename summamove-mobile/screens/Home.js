@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState, useContext } from 'react';
-import { Text, View, ScrollView, Image, T } from 'react-native';
+import { Text, View, ScrollView, Image, T, Button } from 'react-native';
 import { AuthContext } from '../providers/AuthProvider';
 import axios from 'axios';
 import { useIsFocused } from "@react-navigation/native";
@@ -75,6 +75,7 @@ export default function Home() {
         <ScrollView style={tw.style('bg-gray-100 h-full px-5 mt-16')}>
             <Text style={tw.style('font-black text-3xl')}>Hallo {userData.name} 👋</Text>
             <Text style={tw.style('font-bold text-lg')}>Laten we je activiteit checken</Text>
+            <Button  onPress={() => logout()} title='Uitloggen'></Button>
             <StatusBar style="auto" />
 
             <View style={tw.style('mb-8')}>
