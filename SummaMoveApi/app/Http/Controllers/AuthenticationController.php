@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
 
 class AuthenticationController extends Controller
 {
@@ -38,8 +39,9 @@ class AuthenticationController extends Controller
             'password' => 'required|string|min:6'
         ]);
 
-        if (!Auth::attempt($attr)) {
-            return response()->json(['message' => 'Credentials not match'], 401);
+        $user = User::where('email', $attr['email'])->first();
+        if (!$user || !Hash::check($attr['password'], $user->password)) {
+             return response()->json(['message' => 'Credentials not match'], 401);
         }
 
         $response = [
